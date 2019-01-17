@@ -1,16 +1,29 @@
-# Vue.js ワークショップ
-Vue.js初心者向けのワークショップです。
-初めて触る人も、ちょっとだけ触ったことがある人も一緒にマッタリとやっていきましょう。
-多少の経験があり、物足りない人には追加の要素もあります。（ワークショップでの解説はしません。）
+# workshop
 
-## ０. 始める前に - 環境の構築
-実際にVueを使い始める前にプロジェクトを作成し開発環境を用意しましょう。
-PCには既にNode.jsが勿論インストールされていますよね？
-念の為チェックしておきましょう。
+## Project setup
 ```
-$ node -v
-v10.15.0
+yarn install
 ```
-この様に表示されればNodeは既にインストールされています。
 
-次にVueのプロジェクトを色々とよしなにしてくれるVue Cliを用いてプロジェクトを作っていきます。
+### Compiles and hot-reloads for development
+```
+yarn run serve
+```
+
+### Compiles and minifies for production
+```
+yarn run build
+```
+
+### Run your tests
+```
+yarn run test
+```
+
+### Lints and fixes files
+```
+yarn run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
