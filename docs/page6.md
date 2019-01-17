@@ -1,14 +1,14 @@
 # シンプルな家計簿アプリBudgetyを作ってみよう！
 [前の章はこちら](./page5.md)
 
-前章で`top.vue`にデータを受け渡す事が出来たので、今度はフォーム部分を進めていきます。  
+前章で`top.vue`にデータを受け渡す事が出来たので、今度はフォーム部分を進めていきます。  
 
 ## 8. Event UpとEmit
-前回Propsの説明した時に、親から子へPropsを通じてデータを受け渡す事をProps Downと呼ぶ事を学びました。  
-同じ様に子から親へデータを受け渡す、親のmethodsなどを利用する方法があり、その事を ***Event Up*** と呼びます。  
+前回Propsの説明した時に、親から子へPropsを通じてデータを受け渡す事をProps Downと呼ぶ事を学びました。  
+同じ様に子から親へデータを受け渡す、親のmethodsなどを利用する方法があり、その事を ***Event Up*** と呼びます。  
 
 ### 8-1. 子から親へ
-まずは`main-content.vue`に新しくState、Mothodsを追加していきましょう。
+まずは`main-content.vue`に新しくState、Mothodsを追加していきましょう。
 
 ```vue
 <template>
@@ -81,7 +81,7 @@ export default {
         },
         methods: {
             clickHandler() {
-                // middle.vueのStateを扱いやすい様にオブジェクトにまとめる
+                // middle.vueのStateを扱いやすい様にオブジェクトにまとめる
                 const formData = {
                     kind: this.inputKind,
                     desc: this.inputDesc,
@@ -97,11 +97,11 @@ export default {
 ```
 
 #### 8-1-1. v-on
-子コンポーネントのカスタムタグを記述するとき、`v-on`ディレクティブで子のイベントをハンドルしておきます。  
-`main-content.vue`では`middle.vue`に`submit-handler`と言う名前のイベントをハンドルしました。  
-これで子コンポーネントから`submit-handler`を呼び出せば、`submit-handler`に紐付いている親のメソッド`submitHandler()`を発火させる事が出来ます。
+子コンポーネントのカスタムタグを記述するとき、`v-on`ディレクティブで子のイベントをハンドルしておきます。  
+`main-content.vue`では`middle.vue`に`submit-handler`と言う名前のイベントをハンドルしました。  
+これで子コンポーネントから`submit-handler`を呼び出せば、`submit-handler`に紐付いている親のメソッド`submitHandler()`を発火させる事が出来ます。
 
-> `v-on`は`@`で省略する事が出来ます。
+> `v-on`は`@`で省略する事が出来ます。
 > ```vue
 > <child-component v-on:child-event="parentEvent">
 > <child-component @child-event="parentEvent">
