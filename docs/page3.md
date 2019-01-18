@@ -276,8 +276,7 @@ CSSのスタイリングは面倒だと思うので、サクッとコピペで�
 また、ちょっと難しいなぁと思った方は下記のヒントを参考にしてみてください。  
 それでも分かんねぇよ！って方は講師かTAにご相談ください。
 <details>
-    <summary>ヒントはこちら。HTML付き（非表示）</summary>
-    <ol>
+    <summary>ヒントはこちら。HTML付き（非表示）</summary><ol>
         <li> componentsに新しいSFC `top.vue` を作成</li>
         <li> `main-content.vue` で `top.vue` を読み込む</li>
         <li> 
@@ -309,9 +308,8 @@ CSSのスタイリングは面倒だと思うので、サクッとコピペで�
             </details>
         </li>
         <li> `top.vue` の `<style>`　にcssをコーディングする。コピペ用を利用してもOK </li>
-    </ol>
-</details>  
-
+</ol></details>  
+　  
 
 --- 
 
