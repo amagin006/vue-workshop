@@ -24,7 +24,7 @@
     </div>
 </template>
 
-<script>
+<script>
 // 省略
 export default {
     // 省略
