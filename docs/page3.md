@@ -109,7 +109,7 @@ _※ `.js`や `.ts` は省略出来ますが `.vue` は出来ません。_
 新しく `src/components` 下に `the-header.vue` を作成してください。
 
 > ##### なぜTheを付ける？
-> これは`<header>`というタグはHTMLに既に存在し、VueがHTMLの`<header>`なのかVueコンポーネントの`<Header>`なのか判断がつかなくなるからです。他にも`default`なども正しく表示されません。この辺りのルールは[Vueスタイルガイド](https://vuejs.org/v2/style-guide/index.html)を参照してください。
+> これは`<header>`というタグはHTMLに既に存在し、VueがHTMLの`<header>`なのかVueコンポーネントの`<Header>`なのか判断がつかなくなるからです。他にも`default`なども正しく表示されません。この辺りのルールは[Vueスタイルガイド](https://vuejs.org/v2/style-guide/index.html)を参照してください。
 
 `the-header.vue`を作成し開いたら、以下の様にコードを記述してください。
 ```vue
@@ -284,34 +284,39 @@ CSSのスタイリングは面倒だと思うので、サクッとコピペで�
             <li> `top.vue` の `<template>` にhtmlをゴリゴリコーディング
                 <details>
                     <summary>HTMLのコード</summary><p>
-
-```vue
-<template>
-    <section class="top">
-        <h1 class="budget__title">Available Budget in January 2019:</h1>
-        <p class="budget__total">+ 2,345.67</p>
-        <div class="budget__income">
-            <p class="budget__text">income</p>
-            <p class="budget__value">+ 3,456.78</p>
-            <p class="budget__percentage"></p>
-        </div>
-        <div class="budget__expenses">
-            <p class="budget__text">expense</p>
-            <p class="budget__value">+ 3,456.78</p>
-            <p class="budget__percentage">50%</p>
-        </div>
-    </section>
-</template>
-```
-</p></details></li>
+                    
+  ```vue
+  <template>
+      <section class="top">
+          <h1 class="budget__title">Available Budget in January 2019:</h1>
+          <p class="budget__total">+ 2,345.67</p>
+          <div class="budget__income">
+              <p class="budget__text">income</p>
+              <p class="budget__value">+ 3,456.78</p>
+              <p class="budget__percentage"></p>
+          </div>
+          <div class="budget__expenses">
+              <p class="budget__text">expense</p>
+              <p class="budget__value">+ 3,456.78</p>
+              <p class="budget__percentage">50%</p>
+          </div>
+      </section>
+  </template>
+  ```
+  
+   </p>
+   </details>
+              </li>
             <li>
 
 `top.vue` の `<style>`　にcssをコーディングする。コピペ用を利用してもOK </li>
         </ol>
     </div>
-</details>
+</details>  
+
 
 --- 
+
 
 出来ましたか？  
 これで新しいコンポーネント作り、そのコンポーネントをどの様に読み込むのか、  
