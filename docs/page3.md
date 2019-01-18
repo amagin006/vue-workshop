@@ -263,8 +263,8 @@ CSSのスタイリングは面倒だと思うので、サクッとコピペで�
         font-weight: 700;
         text-align: center;
         margin: 0 0 0 1.5em;
-        padding: 3px;
-        width: 40px;
+        padding: 3px 4px 3px 5px;
+        min-width: 40px;
     }
 </style>
 ```

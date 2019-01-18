@@ -8,7 +8,7 @@
 メッソド`submitHandler()`にて`middle.vue`から受け取ったデータを良い感じにStateに反映していきます。  
 まずは最も簡単と思われる`totalAmount`を計算していきましょう。
 
-### 9-1. totalAmountを計算する -10min
+### 9-1. totalAmount,incomeTotal,expensesTotalを計算する -10min
 これもそんなに難しい事はないので皆さんでやってみましょう。
 
 #### やること
@@ -25,8 +25,10 @@
 submitHandler(formData) {
     if(formData.kind === 'inc') {
         this.totalAmount = this.totalAmount + formData.value
+        this.incomeTotal = this.incomeTotal + formData.value
     } else {
         this.totalAmount = this.totalAmount - formData.value
+        this.expensesTotal = this.expensesTotal + formData.value
     }
 }
 ```
@@ -35,9 +37,9 @@ submitHandler(formData) {
 　  
 
 ### 9-2. バランスの表示を改善する。
-`totalAmount`の計算が可能になり、更にそれをStateとして状態を保てるようになりました。  
+これで各々の合計の計算が可能になり、更にそれをStateとして状態を保てるようになりました。  
 ここでフォームに適当なデータを入力してみてください。  
-`totalAmount`の値が更新された事により、既にPropsにて紐付けられた`top.vue`側でその値を受け取り、  
+`totalAmount`などの値が更新された事により、既にPropsにて紐付けられた`top.vue`側でその値を受け取り、  
 Viewに即座に反映され表示されます。
 
 しかしこのままでは桁数が増えてもカンマ区切りにならず若干見難かったりしますし、  
@@ -86,22 +88,23 @@ export default {
 ```
 
 さて、Filterの使い方も分かったところでバランスの値を改善しましょう。  
+`expenses`のパーセンテージも静的なままなので、これを動的に表示出来るように合わせて処理を追加します。  
 `top.vue`を以下の様に編集してください。
 
 ```vue
 <template>
     <section class="top">
         <h1 class="budget__title">Available Budget in {{ getCurrentDate() }}:</h1>
-        <p class="budget__total">{{ totalAmount | balanceFormatter }}<!-- ここにフィルタを追加 --></p>
+        <p class="budget__total">{{ totalAmount | balanceFormatter }}</p>
         <div class="budget__income">
             <p class="budget__text">income</p>
-            <p class="budget__value"> {{ incomeTotal }} </p>
+            <p class="budget__value"> {{ incomeTotal | balanceFormatter }} </p>
             <p class="budget__percentage"></p>
         </div>
         <div class="budget__expenses">
             <p class="budget__text">expense</p>
-            <p class="budget__value"> {{ expensesTotal }}</p>
-            <p class="budget__percentage">50%</p>
+            <p class="budget__value"> {{ expensesTotal | balanceFormatter }}</p>
+            <p class="budget__percentage">{{ expPercentage }}%</p>
         </div>
     </section>
 </template>
@@ -114,6 +117,11 @@ export default {
             incomeTotal: Number,
             expensesTotal: Number
         },
+         computed: {
+             expPercentage() {
+                 return (this.incomeTotal <= 0) ? 0 : Math.round((-this.expensesTotal / this.incomeTotal) * 100)
+             }
+         },
         methods: {
             getCurrentDate() {
                 return format(new Date, 'MMMM, yyyy')
@@ -122,7 +130,14 @@ export default {
         // フィルタを登録する
         filters: {
             balanceFormatter(val) {
-                return (val < 0) ? val.toLocaleString() : `+${ val.toLocaleString() }`
+                const splitVal = Math.abs(val).toFixed(2).split('.')
+                if (val < 0) {
+                    return `- ${Number(splitVal[0]).toLocaleString()}.${splitVal[1]}`
+                } else if (val === 0) {
+                    return '0.00'
+                } else {
+                    return `+ ${Number(splitVal[0]).toLocaleString()}.${splitVal[1]}`
+                }
             }
         }
     }
@@ -130,9 +145,43 @@ export default {
 ```
 
 良い感じになりましたね！ 
+
+しかし、また新しく`computed`オプションが出てきました。  
+見た目はメソッドの様ですが何が違うのでしょうか？
+
+### 9-3. Computed - 算出プロパティ
+
+
+
 さて、それでは本題の方へと戻りましょう。  
 
-### 9-3. 配列として収支データを保存する
-`totalAmount`が計算
+### 9-4. 配列として収支データを保存する
+`totalAmount`が計算が終わったら、今度は収入・支出をそれぞれ配列のデータとして保持出来るようにします。
+これも特に難しい事はないのでサクッと下記の様に編集してください。
+
+```vue
+<script>
+// 省略
+export default {
+    //省略
+    methods: {
+        // リファクタリングしました。
+        submitHandler({ kind, desc, value }) {
+            if(kind === 'inc') {
+                this.totalAmount += value
+                this.incomeTotal += value
+            } else {
+                this.totalAmount -= value
+                this.expensesTotal -= value
+            }
+            this.allItem[kind].push({ desc, value })
+            console.log(this.allItem)
+        }
+    }
+}
+</script>
+```
+
+ブラウザで確認すると
 
 [前に戻る](./page6.md)　 [次に進む](./page8.md) 
