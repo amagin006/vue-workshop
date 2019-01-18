@@ -86,6 +86,7 @@ Bugdetyの作業もいよいよ大詰めになってきました。
 
 ### 10-2. 更にデータを受け渡す
 しかしながら、本来リストの描画をするのは`list-item.vue`の役割であって、`bottom.vue`は動的に追加されるリストをまとめているに過ぎません。そこで更に`list-item.vue`にデータを受け渡します。
+
 `item-list.vue`を次のように編集してください。
 
 ```vue
@@ -93,7 +94,9 @@ Bugdetyの作業もいよいよ大詰めになってきました。
 <template>
     <li class="listItem">
         <p class="listItem__title">{{ itemData.desc | balanceFormatter }}</p>
-        <p class="listItem__value">{{ itemData.value | balanceFormatter }}</p>
+        <!-- この様にFilterはつなげる事も出来ます
+             また、引数を渡すこともできます。      -->
+        <p class="listItem__value">{{ itemData.value | toNegative(kind) | balanceFormatter }}</p>
         <p class="listItem__percentage">{{ percentage | balanceFormatter }}</p>
     </li>
 </template>
@@ -104,6 +107,74 @@ Bugdetyの作業もいよいよ大詰めになってきました。
             itemData: Object,
             percentage: Number,
             kind: String
+        },
+        filters: {
+            // テンプレートから引数を受ける場合、第２引数以降で受けます
+            toNegative(val, kind) {
+                if (kind === 'exp') {
+                    return -val
+                } else {
+                    return val
+                }
+            }
+        }
+    }
+</script>
+<!-- 省略 -->
+```
+
+続いて`bottom.vue`を編集します。
+```vue
+<template>
+    <section class="bottom">
+        <div class="list">
+            <h2 class="list__title list__title--inc">income</h2>
+            <ul v-if="allItem.inc.length" class="list__main inc">
+                <template v-for="data in allItem.inc">
+                    <list-item
+                        kind="inc"
+                        :item-data="data"
+                        :percentage="calcPercentage(data.value, 'inc')"
+                        :key="data.desc"
+                    />
+                </template>
+            </ul>
+        </div>
+        <div class="list">
+            <h2 class="list__title list__title--exp">expenses</h2>
+            <ul v-if="allItem.exp.length" class="list__main exp">
+                <template v-for="data in allItem.exp">
+                    <list-item
+                        kind="exp"
+                        :item-data="data"
+                        :percentage="calcPercentage(data.value, 'exp')"
+                        :key="data.desc"
+                    />
+                </template>
+            </ul>
+        </div>
+    </section>
+</template>
+
+<script>
+    import ListItem from './list-item.vue'
+    export default {
+        components: {
+            ListItem
+        },
+        props: {
+            incomeTotal: Number,
+            expensesTotal: Number,
+            allItem: Object
+        },
+        methods: {
+            calcPercentage(val, kind) {
+                if(kind === 'inc') {
+                    return (this.incomeTotal <= 0) ? 0 : Math.round((val / this.incomeTotal) * 100)
+                } else {
+                    return Math.round((-val / this.expensesTotal) * 100)
+                }
+            }
         }
     }
 </script>

@@ -109,8 +109,10 @@
     .listItem__percentage {
         border-radius: 4px;
         font-size: 1.2rem;
+        text-align: center;
         margin: 0 0 0 1.25em;
         padding: 3px 4px 3px 5px;
+        width: 42px;
     }
 
     .list__main.inc .listItem__value,
