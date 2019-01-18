@@ -12,11 +12,11 @@ Bugdetyの作業もいよいよ大詰めになってきました。
 ここは復習のために皆さんでやってみましょう！
 
 #### やる事
+- `main-content.vue`から`incomeTotal`,`expensesTotal`を受け渡す。
 - `main-content.vue`から`allItem`を`bottom.vue`に受け渡す。変数名は同じく`allItem`にしてください。  
 - `bottom.vue`の最後の`</ul>`( expensesのul )の閉じタグの下に下記のコードを挿入してください。
   
   ```vue
-      <!-- 時間の都合上このコードの説明は割愛します。 -->
       <div v-if="allItem.inc.length" style="font-size: 2rem;">
           {{ allItem.inc[0].desc }}: {{ allItem.inc[0].value }}
       </div>
@@ -26,7 +26,6 @@ Bugdetyの作業もいよいよ大詰めになってきました。
   ```text
   description: 100
   ```
-
 
 #### 答え
 ちょっと難しいなぁと思った方はこちらにサンプルコードを置いておきます。  
@@ -73,6 +72,38 @@ Bugdetyの作業もいよいよ大詰めになってきました。
     export default {
         components: {
             ListItem
+        }
+    }
+</script>
+<!-- 省略 -->
+```
+
+</div></details>
+　  
+
+フォームから入力したディスクリプションと値が、expensesのリスト最下部に表示されましたか？  
+確認できたら次に進みます。
+
+### 10-2. 更にデータを受け渡す
+しかしながら、本来リストの描画をするのは`list-item.vue`の役割であって、`bottom.vue`は動的に追加されるリストをまとめているに過ぎません。そこで更に`list-item.vue`にデータを受け渡します。
+`item-list.vue`を次のように編集してください。
+
+```vue
+<!-- /src/components/list-item.vue -->
+<template>
+    <li class="listItem">
+        <p class="listItem__title">{{ itemData.desc | balanceFormatter }}</p>
+        <p class="listItem__value">{{ itemData.value | balanceFormatter }}</p>
+        <p class="listItem__percentage">{{ percentage | balanceFormatter }}</p>
+    </li>
+</template>
+
+<script>
+    export default {
+        props: {
+            itemData: Object,
+            percentage: Number,
+            kind: String
         }
     }
 </script>

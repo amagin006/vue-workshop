@@ -70,7 +70,6 @@ export default {
 
 > `filters`と複数形な事に気を付けてください。  
 > `Filter`は制限として`this`にアクセスする事が出来ません。  
-> グローバルなFilterも作れますが、今回は時間の都合上説明を割愛します。
 
 #### 9-2-2. Filterの使い方
 登録した`Filter`はマスタッシュまたは`v-bind`ディレクティブの値にパイプ`|`でフィルタ名をつなげる事で呼び出します。
@@ -88,8 +87,42 @@ export default {
 ```
 
 さて、Filterの使い方も分かったところでバランスの値を改善しましょう。  
-`expenses`のパーセンテージも静的なままなので、これを動的に表示出来るように合わせて処理を追加します。  
-`top.vue`を以下の様に編集してください。
+`expenses`のパーセンテージも静的なままなので、これを動的に表示出来るように合わせて処理を追加します。
+  
+`top.vue`にローカルフィルタとして登録しても良いのですが、今回のフィルタは汎用的に使えそうです。  
+そこでどのコンポーネントからも使えるようにグローバルなフィルタとして登録します。  
+
+`main.js`を開き、以下の様に編集してください。
+
+```javascript
+import Vue from 'vue'
+import App from './App.vue'
+
+Vue.config.productionTip = false
+
+Vue.filter('balanceFormatter', val => {
+  const splitVal = Math.abs(val).toFixed(2).split('.')
+  if (val < 0) {
+    return `- ${Number(splitVal[0]).toLocaleString()}.${splitVal[1]}`
+  } else if (val === 0) {
+    return '0.00'
+  } else {
+    return `+ ${Number(splitVal[0]).toLocaleString()}.${splitVal[1]}`
+  }
+})
+
+new Vue({
+  render: h => h(App),
+}).$mount('#app')
+```
+
+グローバルなフィルタを登録するには`Vue.filter()`を用います。  
+`Vue.filter()`のパラメータは以下の通りです。
+```javascript
+Vue.filter('filter-name', callback)
+```
+
+　続いて`top.vue`を以下の様に編集してください。
 
 ```vue
 <template>
@@ -128,18 +161,12 @@ export default {
             }
         },
         // フィルタを登録する
-        filters: {
-            balanceFormatter(val) {
-                const splitVal = Math.abs(val).toFixed(2).split('.')
-                if (val < 0) {
-                    return `- ${Number(splitVal[0]).toLocaleString()}.${splitVal[1]}`
-                } else if (val === 0) {
-                    return '0.00'
-                } else {
-                    return `+ ${Number(splitVal[0]).toLocaleString()}.${splitVal[1]}`
-                }
-            }
-        }
+        // 今回はグローバルに登録するのでローカルは使わない。
+        // filters: {
+        //     filterFunction() {
+        //         do something
+        //     }
+        //}
     }
 </script>
 ```

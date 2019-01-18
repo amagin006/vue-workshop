@@ -97,22 +97,38 @@
         justify-content: space-between;
         padding: 12px;
     }
-    
+
     .listItem:nth-of-type(even) {
         background: #f7f7f7;
     }
-
+    
     .listItem__title {
         flex: 1 1 auto;
     }
-
-    .listItem__value {
     
-    }
-
     .listItem__percentage {
+        border-radius: 4px;
         font-size: 1.2rem;
         margin: 0 0 0 1.25em;
+        padding: 3px 4px 3px 5px;
+    }
+
+    .list__main.inc .listItem__value,
+    .list__main.inc .listItem__percentage {
+        color: #28B9B5;
+    }
+
+    .list__main.inc .listItem__percentage {
+        background: rgba(120, 210, 200, .3);
+    }
+
+    .list__main.exp .listItem__value,
+    .list__main.exp .listItem__percentage {
+        color: #FF5049;
+    }
+
+    .list__main.exp .listItem__percentage {
+        background: rgba(255, 120, 113, .3);
     }
 </style>
 ```
