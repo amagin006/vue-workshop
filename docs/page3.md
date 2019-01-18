@@ -71,7 +71,7 @@ export default {
 /* そのまま */
 </style>
 ```
-#### 4-2-1. 各パートの解説
+#### 4-2-1. 各パートの解説
 
 ##### scriptタグ
 `import Main from './components/main-content.vue'`  
@@ -171,7 +171,7 @@ export default {
 これでヘッダーは完了です。簡単ですね！
 
 ### 4-4. タイトルっぽい部分とバランス部分を作る - 10min
-次にタイトルっぽい部分と収支バランスを表示している部分を作っていきますが、  
+次にタイトルっぽい部分と収支バランスを表示している部分を作っていきますが、  
 この部分はサンプル画像を元に皆さん自身の手で作ってみましょう。  
 **まだロジックなどJavascript周辺は考えなくて大丈夫ですので、HTMLとCSSのみ記述してください。**
 
@@ -181,7 +181,7 @@ export default {
 <p align="center"><img src="./images/ss3.png"></p>
 
 #### やる事
-サンプル画像を参考に新しいコンポーネント `top.vue` を作成し表示してください。  
+サンプル画像を参考に新しいコンポーネント `top.vue` を作成し表示してください。  
 CSSは本題から外れる部分もあるのでコピペでもOKです。
 
 #### 禁止事項
@@ -312,6 +312,7 @@ CSSのスタイリングは面倒だと思うので、サクッとコピペで�
 </details>
 
 --- 
+
 出来ましたか？  
 これで新しいコンポーネント作り、そのコンポーネントをどの様に読み込むのか、  
 HTMLやCSSはどう記述していくのかが何となくはご理解いただけたかと思います。  
@@ -432,10 +433,10 @@ CSSのスタイリングは面倒だと思うので、サクッとコピペで�
     <summary>ヒントはこちら。HTML付き（非表示）</summary>
     <div>
         <ol>
-            <li> componentsに新しいSFC `middle.vue` を作成</li>
-            <li> `main-content.vue` で `middle.vue` を読み込む</li>
-            <li> `middle.vue` の `<template>` にhtmlをゴリゴリコーディング
-                <details>
+            <li> componentsに新しいSFC `middle.vue` を作成</li>
+            <li> `main-content.vue` で `middle.vue` を読み込む</li>
+            <li> `middle.vue` の `<template>` にhtmlをゴリゴリコーディング
+                <details>
                     <summary>HTMLのコード</summary><p>
 
 ```vue
@@ -468,6 +469,7 @@ CSSのスタイリングは面倒だと思うので、サクッとコピペで�
 </details>
 
 ---
+
 出来ましたか？  
 これでもう新しいコンポーネントの作成と読み込み、表示、HTMLとCSSの記述方法は完璧でしょう！  
 このままの勢いで最下部の収支リスト部分も作成していきましょう。

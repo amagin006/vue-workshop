@@ -110,5 +110,4 @@ export default {
 #### 8-1-2. $emit
 
 
-
-[前に戻る](./page5.md)　 [次に進む](./page7.md) 
+[前に戻る](./page5.md)　 [次に進む](./page7.md) 
