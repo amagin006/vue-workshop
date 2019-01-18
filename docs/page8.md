@@ -111,11 +111,7 @@ Bugdetyの作業もいよいよ大詰めになってきました。
         filters: {
             // テンプレートから引数を受ける場合、第２引数以降で受けます
             toNegative(val, kind) {
-                if (kind === 'exp') {
-                    return -val
-                } else {
-                    return val
-                }
+                return (kind === 'exp') ? -val : val
             }
         }
     }
