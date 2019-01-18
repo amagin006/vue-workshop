@@ -87,6 +87,9 @@ export default {
                     desc: this.inputDesc,
                     value: this.inputValue
                 }
+                
+                // 親から受け取ったイベントを$emitで発火。
+                // と同時にformDataを親に返す。
                 this.$emit('submit-handler', formData)
             }
         }
@@ -216,11 +219,15 @@ submitボタンを押した後フォームをクリアする。
                 const formData = {
                     kind: this.inputKind,
                     desc: this.inputDesc,
-                    value: parseFloat(this.inputValue, 10)
+                    value: Number(this.inputValue)
                 }
+                // Stateを初期化
                 this.inputKind = 'inc'
                 this.inputDesc = ''
                 this.inputValue = 0
+                
+                // 親から受け取ったイベントを$emitで発火。
+                // と同時にformDataを親に返す。
                 this.$emit('submit-handler', formData)
             }
         }

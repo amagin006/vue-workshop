@@ -394,7 +394,7 @@ CSSのスタイリングは面倒だと思うので、サクッとコピペで�
     .form__value input {
         border: 1px solid #e7e7e7;
         background: #fff;
-        color: inherit;
+        color: #333;
         display: block;
         font-family: inherit;
         font-size: 1.4rem;
