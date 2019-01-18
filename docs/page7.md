@@ -4,16 +4,135 @@
 この章ではフォームから受け取ったデータを`main-content.vue`のStateに反映し、
 合計やパーセントなどを計算していきます。
 
-## 9. フォームのデータをSstateに反映する。
+## 9. フォームのデータをStateに反映する。
 メッソド`submitHandler()`にて`middle.vue`から受け取ったデータを良い感じにStateに反映していきます。  
 まずは最も簡単と思われる`totalAmount`を計算していきましょう。
 
 ### 9-1. totalAmountを計算する -10min
 これもそんなに難しい事はないので皆さんでやってみましょう。
 
-##### やること
+#### やること
 フォームから受け取ったデータを使って`totalAmount`を計算する。  
 ※ヒント: 収支タイプに気をつけてください。
 
+#### 答え
+ちょっと難しいなぁと思った方はこちらにサンプルコードを置いておきます。
+
+<details><summary>答え<b>(まずはトライ！)</b></summary><div>
+
+```javascript
+// /src/components/middle.vue
+submitHandler(formData) {
+    if(formData.kind === 'inc') {
+        this.totalAmount = this.totalAmount + formData.value
+    } else {
+        this.totalAmount = this.totalAmount - formData.value
+    }
+}
+```
+
+</div></details>
+　  
+
+### 9-2. バランスの表示を改善する。
+`totalAmount`の計算が可能になり、更にそれをStateとして状態を保てるようになりました。  
+ここでフォームに適当なデータを入力してみてください。  
+`totalAmount`の値が更新された事により、既にPropsにて紐付けられた`top.vue`側でその値を受け取り、  
+Viewに即座に反映され表示されます。
+
+しかしこのままでは桁数が増えてもカンマ区切りにならず若干見難かったりしますし、  
+プラスの状態の時にも`+`の文字があった方が見た目的にもUX的にもベターでしょう。  
+
+よし、じゃあメソッドを使って良い感じにしよう！と思ったそこのあなた、そうあなたです。  
+ちょっと待った！惜しい！実に惜しい！  
+確かにメソッドを通して値を加工しても良いのですが、Vueにはもっと便利な機能があるのでそちらを使いましょう！
+
+### 9-2-1. Filter
+`Filter`とは文字数を丸めたり、数字にカンマを入れると言ったテキストベースの変換処理に特化した機能です。  
+`Filter`の登録には`filters`オプションに登録する事でそのコンポーネントの中でのみ使用できます。
+
+```vue
+<script>
+export default {
+    // 省略
+    filters: {
+        //filterメソッドの第一引数として対象のデータが渡されます。
+        filterName(val) {
+            // 大文字に変換してデータを返す
+            return val.toUpperCase() 
+        }
+    }
+}
+</script>
+```
+
+> `filters`と複数形な事に気を付けてください。  
+> `Filter`は制限として`this`にアクセスする事が出来ません。  
+> グローバルなFilterも作れますが、今回は時間の都合上説明を割愛します。
+
+#### 9-2-2. Filterの使い方
+登録した`Filter`はマスタッシュまたは`v-bind`ディレクティブの値にパイプ`|`でフィルタ名をつなげる事で呼び出します。
+
+```vue
+<!-- example -->
+<template>
+    <div>
+        <!--マスタッシュで使う場合-->
+        {{ 対象のデータ | フィルタ名 }}
+        <!--v-bindで使う場合-->
+        <div :class="対象のデータ | フィルタ名"></div>
+    </div>
+</template>
+```
+
+さて、Filterの使い方も分かったところでバランスの値を改善しましょう。  
+`top.vue`を以下の様に編集してください。
+
+```vue
+<template>
+    <section class="top">
+        <h1 class="budget__title">Available Budget in {{ getCurrentDate() }}:</h1>
+        <p class="budget__total">{{ totalAmount | balanceFormatter }}<!-- ここにフィルタを追加 --></p>
+        <div class="budget__income">
+            <p class="budget__text">income</p>
+            <p class="budget__value"> {{ incomeTotal }} </p>
+            <p class="budget__percentage"></p>
+        </div>
+        <div class="budget__expenses">
+            <p class="budget__text">expense</p>
+            <p class="budget__value"> {{ expensesTotal }}</p>
+            <p class="budget__percentage">50%</p>
+        </div>
+    </section>
+</template>
+
+<script>
+    import { format } from 'date-fns'
+    export default {
+        props: {
+            totalAmount: Number,
+            incomeTotal: Number,
+            expensesTotal: Number
+        },
+        methods: {
+            getCurrentDate() {
+                return format(new Date, 'MMMM, yyyy')
+            }
+        },
+        // フィルタを登録する
+        filters: {
+            balanceFormatter(val) {
+                return (val < 0) ? val.toLocaleString() : `+${ val.toLocaleString() }`
+            }
+        }
+    }
+</script>
+```
+
+良い感じになりましたね！ 
+さて、それでは本題の方へと戻りましょう。  
+
+### 9-3. 配列として収支データを保存する
+`totalAmount`が計算
 
 [前に戻る](./page6.md)　 [次に進む](./page8.md) 
