@@ -275,17 +275,15 @@ CSSのスタイリングは面倒だと思うので、サクッとコピペで�
 #### お助け
 また、ちょっと難しいなぁと思った方は下記のヒントを参考にしてみてください。  
 それでも分かんねぇよ！って方は講師かTAにご相談ください。
-<details>
-    <summary>ヒントはこちら。HTML付き（非表示）</summary><ol>
-        <li> componentsに新しいSFC `top.vue` を作成</li>
-        <li> `main-content.vue` で `top.vue` を読み込む</li>
-        <li> 
-            <p> `top.vue` の `<template>` にhtmlをゴリゴリコーディング </p>
-            <details>
-                <summary>HTMLのコード</summary>
-                <p>
-                 
-  ```vue
+<details><summary>ヒントはこちら。HTML付き（非表示）</summary><div>
+  <ol>
+    <li> componentsに新しいSFCtop.vueを作成</li>
+    <li> main-content.vueでtop.vueを読み込む</li>
+    <li>
+      <p>top.vueのtemplateにhtmlをゴリゴリコーディング</p>
+      <details><summary>HTMLのコード</summary><div>
+      
+~~~vue
   <template>
       <section class="top">
           <h1 class="budget__title">Available Budget in January 2019:</h1>
@@ -302,17 +300,14 @@ CSSのスタイリングは面倒だと思うので、サクッとコピペで�
           </div>
       </section>
   </template>
-  ```
- 　  
-                </p>
-            </details>
-        </li>
-        <li> `top.vue` の `<style>`　にcssをコーディングする。コピペ用を利用してもOK </li>
-</ol></details>  
+~~~
 　  
+      </div></details>
+    </li>
+    <li>top.vueのstyleにcssをコーディングする。コピペ用を利用してもOK </li>
+</ol></div></details>  
 
 --- 
-
 
 出来ましたか？  
 これで新しいコンポーネント作り、そのコンポーネントをどの様に読み込むのか、  
@@ -434,9 +429,9 @@ CSSのスタイリングは面倒だと思うので、サクッとコピペで�
     <summary>ヒントはこちら。HTML付き（非表示）</summary>
     <div>
         <ol>
-            <li> componentsに新しいSFC `middle.vue` を作成</li>
-            <li> `main-content.vue` で `middle.vue` を読み込む</li>
-            <li> `middle.vue` の `<template>` にhtmlをゴリゴリコーディング
+            <li> componentsに新しいSFC middle.vue を作成</li>
+            <li> main-content.vue で middle.vue を読み込む</li>
+            <li> middle.vueのtemplateにhtmlをゴリゴリコーディング
                 <details>
                     <summary>HTMLのコード</summary><p>
 
@@ -462,9 +457,7 @@ CSSのスタイリングは面倒だと思うので、サクッとコピペで�
 </template>
 ```
 </p></details></li>
-            <li>
-
-`middle.vue` の `<style>`　にcssをコーディングする。コピペ用を利用してもOK </li>
+            <li>middle.vueのstyleにcssをコーディングする。コピペ用を利用してもOK </li>
         </ol>
     </div>
 </details>
