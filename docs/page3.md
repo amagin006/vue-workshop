@@ -277,14 +277,15 @@ CSSのスタイリングは面倒だと思うので、サクッとコピペで�
 それでも分かんねぇよ！って方は講師かTAにご相談ください。
 <details>
     <summary>ヒントはこちら。HTML付き（非表示）</summary>
-    <div>
-        <ol>
-            <li> componentsに新しいSFC `top.vue` を作成</li>
-            <li> `main-content.vue` で `top.vue` を読み込む</li>
-            <li> `top.vue` の `<template>` にhtmlをゴリゴリコーディング
-                <details>
-                    <summary>HTMLのコード</summary><p>
-                    
+    <ol>
+        <li> componentsに新しいSFC `top.vue` を作成</li>
+        <li> `main-content.vue` で `top.vue` を読み込む</li>
+        <li> 
+            <p> `top.vue` の `<template>` にhtmlをゴリゴリコーディング </p>
+            <details>
+                <summary>HTMLのコード</summary>
+                <p>
+                 
   ```vue
   <template>
       <section class="top">
@@ -303,15 +304,12 @@ CSSのスタイリングは面倒だと思うので、サクッとコピペで�
       </section>
   </template>
   ```
-  
-   </p>
-   </details>
-              </li>
-            <li>
-
-`top.vue` の `<style>`　にcssをコーディングする。コピペ用を利用してもOK </li>
-        </ol>
-    </div>
+ 　  
+                </p>
+            </details>
+        </li>
+        <li> `top.vue` の `<style>`　にcssをコーディングする。コピペ用を利用してもOK </li>
+    </ol>
 </details>  
 
 
