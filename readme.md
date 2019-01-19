@@ -12,7 +12,7 @@ Vue.js初心者向けのワークショップです。
 ただToDoを作るだけでは定番過ぎて面白くないので、収支を登録・確認出来る、シンプルな家計簿アプリを作ってみましょう！
 
 #### 完成イメージ
-あとで貼る
+<p align="center"><img src="./docs/images/ss1.png"></p>
 
 ## 1. 始める前に - 環境の構築
 実際にVueを使い始める前にプロジェクトを作成し開発環境を用意しましょう。  
@@ -62,7 +62,7 @@ $ yarn serve
 その後画面の表示の通りブラウザで [`http://localhost:8080`](http://localhost:8080/) にアクセスしてみましょう  
 以下の様な画面が表示されていればOKです。  
 
-<p align="center"><img src="./docs/images/ss1.png"></p>
+<p align="center"><img src="./docs/images/ss2.png"></p>
 
 これで開発に必要な環境を整える事は完了です。  
 ここまでくればすぐにでも開発を進める事が出来ます。  

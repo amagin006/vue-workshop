@@ -30,8 +30,8 @@
 
 ## Special Thanks!
 
-- ### Yuki Sato - TA & Reviewer 
-- ### Frog Agent & Hideto Yasunori - Event Organiser
-- ### And... You.
+#### Yuki Sato - TA & Reviewer  
+#### Frog Agent & Hideto Yasunori - Event Organiser
+#### And... You!
 
 
