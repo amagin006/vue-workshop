@@ -48,6 +48,23 @@ export default {
 </script>
 ```
 
+#### 8-1-1. v-on
+子コンポーネントのカスタムタグを記述するとき、`v-on`ディレクティブで子のイベントをハンドルしておきます。  
+`main-content.vue`では`middle.vue`に`submit-handler`と言う名前のイベントをハンドルしました。  
+これで子コンポーネントから`submit-handler`を呼び出せば、`submit-handler`に紐付いている親のメソッド`submitHandler()`を発火させる事が出来ます。
+
+また親子のイベントを関連付ける以外にも、javascriptの`addEventListener()`やjQueryの`on()`の様にクリックイベントやマウスオーバーのイベントを要素に付与する際にも使います。イベントの詳細は[公式ドキュメント](https://jp.vuejs.org/v2/api/#v-on)を参照してください。
+
+```vue
+<button @click="submitButtonEvent">submit</button>
+```
+
+> `v-on`は`@`で省略する事が出来ます。
+> ```vue
+> <child-component v-on:child-event="parentEvent">
+> <child-component @child-event="parentEvent">
+> ```
+
 同じく子にあたる`middle.vue`も編集していきます。
 ```vue
 <template>
@@ -99,23 +116,6 @@ export default {
 <!-- 省略 -->
 ```
 
-#### 8-1-1. v-on
-子コンポーネントのカスタムタグを記述するとき、`v-on`ディレクティブで子のイベントをハンドルしておきます。  
-`main-content.vue`では`middle.vue`に`submit-handler`と言う名前のイベントをハンドルしました。  
-これで子コンポーネントから`submit-handler`を呼び出せば、`submit-handler`に紐付いている親のメソッド`submitHandler()`を発火させる事が出来ます。
-
-また親子のイベントを関連付ける以外にも、javascriptの`addEventListener()`やjQueryの`on()`の様にクリックイベントやマウスオーバーのイベントを要素に付与する際にも使います。イベントの詳細は[公式ドキュメント](https://jp.vuejs.org/v2/api/#v-on)を参照してください。
-
-```vue
-<button @click="submitButtonEvent">submit</button>
-```
-
-> `v-on`は`@`で省略する事が出来ます。
-> ```vue
-> <child-component v-on:child-event="parentEvent">
-> <child-component @child-event="parentEvent">
-> ```
-
 #### 8-1-2. $emit
 子コンポーネントは適当なタイミングで(殆どの場合methodsの中で実行されます。) `$emit` を使って親から渡されたイベント（Budgetyの場合は`submit-handler`）を実行します。  
 この時に２つ目以降の引数を任意にデータを持たせ親側に渡すことも出来ます。
@@ -131,7 +131,7 @@ export default {
     methods: {
         clickHandler() {
             // このthisはvueのインスタンスを指します。
-            // 第一引数は親から受け取ったイベント名
+            // 第一引数は、親で子コンポーネントタグに指定したv-onのプロパティ名
             this.$emit('parent-event', { message: 'from child' })
         }
     }
@@ -156,6 +156,11 @@ export default {
 }
 </script>
 ```
+
+#### 8-1-2. v-model - 双方向データバインディング 
+フォームに入力された値と`data`プロパティに指定した変数を結びつけます。  
+v-modelはフォームの`valueプロパティ`にバインドされます。  
+つまり、data
 　  
 > ##### チョイ足しポイント
 > 今のままでは毎回Submitボタンをマウスで押さないといけません。  
@@ -242,3 +247,4 @@ submitボタンを押した後フォームをクリアする。
 これでちょっとした問題も解決したので次に進みます。
 
 [前に戻る](./page5.md)　 [次に進む](./page7.md) 
+

@@ -277,7 +277,7 @@ CSSのスタイリングは面倒だと思うので、サクッとコピペで�
 それでも分かんねぇよ！って方は講師かTAにご相談ください。
 <details><summary>ヒントはこちら。HTML付き（非表示）</summary><div>
   <ol>
-    <li> componentsに新しいSFCtop.vueを作成</li>
+    <li> componentsに新しいSFC `top.vue` を作成</li>
     <li> main-content.vueでtop.vueを読み込む</li>
     <li>
       <p>top.vueのtemplateにhtmlをゴリゴリコーディング</p>

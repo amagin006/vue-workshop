@@ -26,6 +26,8 @@ Bugdetyの作業もいよいよ大詰めになってきました。
   ```text
   description: 100
   ```
+  
+- 上記のテスト表示が確認できたら先程`</ul>`( expensesのul )の閉じタグの上に追記したコードを削除してください。
 
 #### 答え
 ちょっと難しいなぁと思った方はこちらにサンプルコードを置いておきます。  
@@ -126,27 +128,25 @@ Bugdetyの作業もいよいよ大詰めになってきました。
         <div class="list">
             <h2 class="list__title list__title--inc">income</h2>
             <ul v-if="allItem.inc.length" class="list__main inc">
-                <template v-for="data in allItem.inc">
-                    <list-item
-                        kind="inc"
-                        :item-data="data"
-                        :percentage="calcPercentage(data.value, 'inc')"
-                        :key="data.desc"
-                    />
-                </template>
+                <list-item
+                    v-for="data in allItem.inc"
+                    kind="inc"
+                    :item-data="data"
+                    :percentage="calcPercentage(data.value, 'inc')"
+                    :key="data.desc"
+                />
             </ul>
         </div>
         <div class="list">
             <h2 class="list__title list__title--exp">expenses</h2>
             <ul v-if="allItem.exp.length" class="list__main exp">
-                <template v-for="data in allItem.exp">
-                    <list-item
-                        kind="exp"
-                        :item-data="data"
-                        :percentage="calcPercentage(data.value, 'exp')"
-                        :key="data.desc"
-                    />
-                </template>
+                <list-item
+                    v-for="data in allItem.exp"
+                    kind="exp"
+                    :item-data="data"
+                    :percentage="calcPercentage(data.value, 'exp')"
+                    :key="data.desc"
+                />
             </ul>
         </div>
     </section>
