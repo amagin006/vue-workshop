@@ -28,7 +28,7 @@ submitHandler(formData) {
         this.incomeTotal = this.incomeTotal + formData.value
     } else {
         this.totalAmount = this.totalAmount - formData.value
-        this.expensesTotal = this.expensesTotal + formData.value
+        this.expensesTotal = this.expensesTotal - formData.value
     }
 }
 ```
